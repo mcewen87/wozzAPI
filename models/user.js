@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt-nodejs");
 const mongoose = require("mongoose");
 const categorySchema = require("./category");
+const noteSchema = require("./notes");
 const eventSchema = require("./event");
 
 const SALT_FACTOR = 10;
@@ -9,7 +10,8 @@ let userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true, lowercase: true },
   password: { type: String, required: true },
   categories: [categorySchema],
-  events: [eventSchema]
+  events: [eventSchema],
+  notes: [noteSchema]
 });
 
 let noop = function() {};

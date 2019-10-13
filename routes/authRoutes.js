@@ -14,7 +14,7 @@ module.exports = app => {
   app.get("/checkAuth", (req, res, next) => {
     if (req.isAuthenticated()) {
       console.log("This is a test: " + req.user);
-      res.send({ authStatus: true });
+      res.send({ user: req.user, authStatus: true });
     } else {
       console.log("not auth'd");
       res.send({ authStatus: false });
@@ -49,6 +49,32 @@ module.exports = app => {
             { title: "Diet" },
             { title: "Health" },
             { title: "Social" }
+          ],
+          events: [
+            {
+              title: "Went Shopping",
+              category: "Lifestyle",
+              count: 1,
+              lastOccurrence: Date.now()
+            },
+            {
+              title: "Ate Ice Cream",
+              category: "Diet",
+              count: 1,
+              lastOccurrence: Date.now()
+            },
+            {
+              title: "Jogged 2 Miles",
+              category: "Health",
+              count: 1,
+              lastOccurrence: Date.now()
+            },
+            {
+              title: "Made new Friends",
+              category: "Social",
+              count: 1,
+              lastOccurrence: Date.now()
+            }
           ]
         });
         newUser.save(next);
