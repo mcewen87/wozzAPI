@@ -3,6 +3,7 @@ let mongoose = require("mongoose");
 let eventSchema = new mongoose.Schema({
   title: { type: String, required: true, unique: false },
   category: { type: String, required: true, unique: false },
+  noteId: { type: String, required: true, unique: false },
   lastActiveWeek: { type: Number },
   lastOccurrence: { type: Date, required: true },
   longestDuration: { type: Number, required: false },
