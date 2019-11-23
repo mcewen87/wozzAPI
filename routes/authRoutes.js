@@ -1,5 +1,6 @@
 const passport = require("passport");
 const User = require("../models/user");
+const moment = require("moment");
 
 module.exports = app => {
   //Generate CSRF Token
@@ -14,6 +15,44 @@ module.exports = app => {
   app.get("/checkAuth", (req, res, next) => {
     if (req.isAuthenticated()) {
       console.log("This is a test: " + req.user);
+      const id = req.user.id.toString();
+      //new stuff
+
+      User.findOne({ _id: id }, function(err, user) {
+        user.events.map((e, i) => {
+          if (e.lastActiveWeek != moment().format("W") + 1) {
+            console.log(e.lastActiveWeek + " " + moment().format("W"));
+            console.log(e.countHistory);
+
+            e.countHistory.push(e.count);
+
+            if (e.countHistory.length > 3) {
+              const average = Math.floor(
+                e.countHistory.reduce((a, b) => a + b) / e.countHistory.length
+              );
+              e.averageCount = average;
+            }
+
+            e.count = 0;
+            e.positiveExpHistory = e.positiveExp;
+            e.negativeExpHistory = e.negativeExp;
+            e.neutralExpHistory = e.neutralExp;
+            e.positiveExp = 0;
+            e.negativeExp = 0;
+            e.neutralExp = 0;
+          }
+          return e;
+        });
+
+        user.save();
+      });
+
+      //new stuff
+
+      // highestCount: 0,
+      // averageCount: 0,
+      // lowestCount: 0
+
       res.send({ user: req.user, authStatus: true });
     } else {
       console.log("not auth'd");
@@ -49,32 +88,6 @@ module.exports = app => {
             { title: "Diet" },
             { title: "Health" },
             { title: "Social" }
-          ],
-          events: [
-            {
-              title: "Went Shopping",
-              category: "Lifestyle",
-              count: 1,
-              lastOccurrence: Date.now()
-            },
-            {
-              title: "Ate Ice Cream",
-              category: "Diet",
-              count: 1,
-              lastOccurrence: Date.now()
-            },
-            {
-              title: "Jogged 2 Miles",
-              category: "Health",
-              count: 1,
-              lastOccurrence: Date.now()
-            },
-            {
-              title: "Made new Friends",
-              category: "Social",
-              count: 1,
-              lastOccurrence: Date.now()
-            }
           ]
         });
         newUser.save(next);

@@ -20,16 +20,25 @@ module.exports = app => {
     let encodedEventTitle = rotation.encode(req.body.event);
     const event = {
       title: encodedEventTitle,
-      //   title: req.body.event,
       category: req.body.category,
       noteId: req.body.noteId,
       lastActiveWeek: req.body.lastActiveWeek,
       lastOccurrence: Date.now(),
+      longestDuration: 0,
+      longestDurationHistory: 0,
       count: 1,
       positiveExp: req.body.positiveExp,
       neutralExp: req.body.neutralExp,
-      negativeExp: req.body.negativeExp
+      negativeExp: req.body.negativeExp,
+      positiveExpHistory: 0,
+      negativeExpHistory: 0,
+      neutralExpHistory: 0,
+      countHistory: [],
+      highestCount: 0,
+      averageCount: 0,
+      lowestCount: 0
     };
+
     const note = {
       dateCreated: Date.now(),
       parentEvent: req.body.noteId,
@@ -37,20 +46,37 @@ module.exports = app => {
       category: req.body.category
     };
     const id = req.user.id.toString();
-    User.findOneAndUpdate(
-      { _id: id },
-      {
-        $push: { events: event, notes: note }
-      },
-      { new: true },
-      (error, document) => {
-        if (error) {
-          console.log(error);
-          return res.json({ success: false, message: error.message });
+    if (note.content.length > 1) {
+      User.findOneAndUpdate(
+        { _id: id },
+        {
+          $push: { events: event, notes: note }
+        },
+        { new: true },
+        (error, document) => {
+          if (error) {
+            console.log(error);
+            return res.json({ success: false, message: error.message });
+          }
+          res.json({ event: document.events[document.events.length - 1] });
         }
-        res.json({ event: document.events[document.events.length - 1] });
-      }
-    );
+      );
+    } else {
+      User.findOneAndUpdate(
+        { _id: id },
+        {
+          $push: { events: event }
+        },
+        { new: true },
+        (error, document) => {
+          if (error) {
+            console.log(error);
+            return res.json({ success: false, message: error.message });
+          }
+          res.json({ event: document.events[document.events.length - 1] });
+        }
+      );
+    }
   });
 
   //Reset Event
@@ -94,6 +120,45 @@ module.exports = app => {
           return res.json({ success: false, message: error.message });
         }
         res.json({ events: document.events });
+      }
+    );
+  });
+  //Add Category
+
+  app.post("/addCategory", (req, res, next) => {
+    const category = { title: req.body.category };
+    const id = req.user.id.toString();
+    User.findOneAndUpdate(
+      { _id: id },
+      {
+        $push: { categories: category }
+      },
+      { new: true },
+      (error, document) => {
+        if (error) {
+          console.log(error);
+          return res.json({ success: false, message: error.message });
+        }
+        res.json({ categories: document.categories });
+      }
+    );
+  });
+
+  app.post("/deleteCategory", (req, res, next) => {
+    const categoryId = req.body.categoryId;
+    const id = req.user.id.toString();
+    User.findOneAndUpdate(
+      { _id: id },
+      {
+        $pull: { categories: { _id: categoryId } }
+      },
+      { new: true },
+      (error, document) => {
+        if (error) {
+          console.log(error);
+          return res.json({ success: false, message: error.message });
+        }
+        res.json({ categories: document.categories });
       }
     );
   });
