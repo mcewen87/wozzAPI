@@ -18,7 +18,8 @@ const { User } = require("./models/user");
 //CONNECT TO DATABASE
 mongoose.connect(process.env.dataBaseConnection, {
   dbName: process.env.dataBaseName,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useNewUrlParser: true
 });
 
 const db = mongoose.connection;
@@ -68,7 +69,7 @@ app.use((error, req, res, next) => {
 });
 
 // => SETUP SERVER ON LOCAL PORT
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("I listen therefor I am.");
 });
 
