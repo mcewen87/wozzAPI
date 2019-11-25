@@ -16,11 +16,14 @@ const setUpPassport = require("./services/passport");
 const { User } = require("./models/user");
 
 //CONNECT TO DATABASE
-mongoose.connect(process.env.dataBaseConnection, {
-  dbName: process.env.dataBaseName,
-  useFindAndModify: false,
-  useNewUrlParser: true
-});
+mongoose.connect(
+  "mongodb+srv://Jon_McEwen:UNM14mnu@wozzbeta-h1h0f.mongodb.net/test?retryWrites=true&w=majority",
+  {
+    dbName: process.env.dataBaseName,
+    useFindAndModify: false,
+    useNewUrlParser: true
+  }
+);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
