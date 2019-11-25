@@ -19,7 +19,7 @@ const { User } = require("./models/user");
 mongoose.connect(
   "mongodb+srv://Jon_McEwen:UNM14mnu@wozzbeta-h1h0f.mongodb.net/test?retryWrites=true&w=majority",
   {
-    dbName: process.env.dataBaseName,
+    dbName: "WozzBeta",
     useFindAndModify: false,
     useNewUrlParser: true
   }
@@ -52,7 +52,7 @@ app.use(csurf({ cookie: true }));
 app.use(
   session({
     //This is our Encryption Key
-    secret: process.env.sessionCode,
+    secret: "uuii,ziLUp$Dg?,I#i&rwooP3=9suall99LF5YJ~{t",
     //We set resave to false because our mongo store implements the "touch" function
     resave: false,
     //We Set saveUninitialized to false because we don't want to save unmodified
@@ -62,7 +62,7 @@ app.use(
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       //We encrypt out store code
-      code: process.env.storeCode
+      code: "aldf98ra33"
     })
   })
 );
