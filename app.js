@@ -32,8 +32,7 @@ const app = express();
 //SETUP APPLICATION MIDDLEWARE
 app.use(helmet());
 app.use(cookieParser());
-app.use(cors({ origin: true, credentials: true }));
-app.options("*", cors());
+app.use(cors({ origin: false, credentials: true }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(csurf({ cookie: true }));
