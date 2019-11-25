@@ -79,7 +79,9 @@ app.use((error, req, res, next) => {
 });
 
 // => SETUP SERVER ON LOCAL PORT
-app.listen(process.env.PORT || 3000, () => {
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
   console.log("I listen therefor I am.");
 });
 
