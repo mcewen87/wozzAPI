@@ -16,14 +16,11 @@ const setUpPassport = require("./services/passport");
 const { User } = require("./models/user");
 
 //CONNECT TO DATABASE
-mongoose.connect(
-  "mongodb+srv://Jon_McEwen:UNM14mnu@wozzbeta-h1h0f.mongodb.net/test?retryWrites=true&w=majority",
-  {
-    dbName: "WozzBeta",
-    useFindAndModify: false,
-    useNewUrlParser: true
-  }
-);
+mongoose.connect(process.env.dataBaseConnection, {
+  dbName: process.env.dataBaseName,
+  useFindAndModify: false,
+  useNewUrlParser: true
+});
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
@@ -52,7 +49,7 @@ app.use(csurf({ cookie: true }));
 app.use(
   session({
     //This is our Encryption Key
-    secret: "uuii,ziLUp$Dg?,I#i&rwooP3=9suall99LF5YJ~{t",
+    secret: process.env.sessionCode,
     //We set resave to false because our mongo store implements the "touch" function
     resave: false,
     //We Set saveUninitialized to false because we don't want to save unmodified
@@ -62,7 +59,7 @@ app.use(
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       //We encrypt out store code
-      code: "aldf98ra33"
+      code: process.env.storeCode
     })
   })
 );
@@ -79,10 +76,17 @@ app.use((error, req, res, next) => {
 });
 
 // => SETUP SERVER ON LOCAL PORT
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log("I listen therefor I am.");
+app.listen(process.env.PORT || 3000, () => {
+  console.log("I listen, therefor I am.");
+  console.log(
+    process.env.dataBaseConnection +
+      " " +
+      process.env.PORT +
+      " " +
+      process.env.sessionCode +
+      " " +
+      process.env.dataBaseName
+  );
 });
 
 module.exports = app;
