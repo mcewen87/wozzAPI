@@ -34,7 +34,7 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:8000/",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: true,
     credentials: true
