@@ -15,6 +15,16 @@ const setUpPassport = require("./services/passport");
 // REQUIRE MODEL FILES
 const { User } = require("./models/user");
 
+console.log(
+  process.env.dataBaseConnection +
+    " " +
+    process.env.PORT +
+    " " +
+    process.env.sessionCode +
+    " " +
+    process.env.dataBaseName
+);
+
 //CONNECT TO DATABASE
 mongoose.connect(process.env.dataBaseConnection, {
   dbName: process.env.dataBaseName,
