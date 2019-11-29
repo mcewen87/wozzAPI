@@ -36,7 +36,7 @@ app.use(
   cors({
     origin: "https://wozzapp.netlify.com",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "csrf-token"],
     preflightContinue: true,
     credentials: true
   })
