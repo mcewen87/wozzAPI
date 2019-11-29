@@ -44,7 +44,7 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:8000/",
+    origin: "wozzapp.netlify.com",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: true,
     credentials: true
