@@ -34,7 +34,7 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://wozzapp.netlify.com",
+    origin: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: ["Content-Type", "Authorization", "csrf-token"],
     preflightContinue: true,
