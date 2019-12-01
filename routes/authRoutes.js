@@ -1,6 +1,7 @@
 const passport = require("passport");
 const User = require("../models/user");
 const moment = require("moment");
+const cors = require("cors");
 
 module.exports = app => {
   //Generate CSRF Token
@@ -71,6 +72,7 @@ module.exports = app => {
   //Sign up
   app.post(
     "/signUp",
+    cors(),
     (req, res, next) => {
       const email = req.body.email;
       const password = req.body.password;
