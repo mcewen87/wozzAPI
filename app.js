@@ -49,7 +49,7 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(csurf({ cookie: true }));
-app.options("*", cors());
+app.options("https://wozzapp.netlify.com", cors());
 
 // We Will use Secure in Production
 // when we have an HTTPS connection
