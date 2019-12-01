@@ -4,21 +4,7 @@ const moment = require("moment");
 const cors = require("cors");
 
 module.exports = app => {
-  const options = {
-    origin: "https://wozzapp.netlify.com",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders:
-      "Content-Type, Access-Control-Allow-Headers, Access-Control-Allow-Origin, Authorization,csrf-token",
-    exposedHeaders:
-      "Content-Type, Access-Control-Allow-Headers, Access-Control-Allow-Origin, Authorization,csrf-token",
-    maxAge: 3600,
-    preflightContinue: true,
-    credentials: true
-  };
   //Generate CSRF Token
-
-  app.options("/getToken", cors(options));
-  app.options("/signUp", cors(options));
 
   app.get("/getToken", (req, res) => {
     res.header("Access-Control-Allow-Origin", "https://wozzapp.netlify.com");
