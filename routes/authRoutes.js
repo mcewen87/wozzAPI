@@ -6,6 +6,9 @@ const cors = require("cors");
 module.exports = app => {
   //Generate CSRF Token
 
+  app.options("/getToken", cors());
+  app.options("/signUp", cors());
+
   app.get("/getToken", (req, res) => {
     res.cookie("XSRF-TOKEN", req.csrfToken(), {
       sameSite: none,
