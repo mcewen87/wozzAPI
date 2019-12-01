@@ -28,29 +28,28 @@ setUpPassport();
 
 //INITIALIZE EXPRESS
 const app = express();
+const options = {
+  origin: "https://wozzapp.netlify.com",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders:
+    "Content-Type, Access-Control-Allow-Headers, Authorization,csrf-token",
+  exposedHeaders:
+    "Content-Type, Access-Control-Allow-Headers, Authorization,csrf-token",
+  maxAge: 3600,
+  preflightContinue: true,
+  credentials: true
+};
 
 //SETUP APPLICATION MIDDLEWARE
 app.use(helmet());
 app.use(cookieParser());
 
-app.use(
-  cors({
-    origin: "https://wozzapp.netlify.com",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders:
-      "Content-Type, Access-Control-Allow-Headers, Authorization,csrf-token",
-    exposedHeaders:
-      "Content-Type, Access-Control-Allow-Headers, Authorization,csrf-token",
-    maxAge: 3600,
-    preflightContinue: true,
-    credentials: true
-  })
-);
+app.use(cors(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(csurf({ cookie: true }));
-app.options("/getToken", cors());
-app.options("/signUp", cors());
+app.options("/getToken", cors(options));
+app.options("/signUp", cors(options));
 
 // We Will use Secure in Production
 // when we have an HTTPS connection
