@@ -6,7 +6,10 @@ module.exports = app => {
   //Generate CSRF Token
 
   app.get("/getToken", (req, res) => {
-    res.cookie("XSRF-TOKEN", req.csrfToken());
+    res.cookie("XSRF-TOKEN", req.csrfToken(), {
+      sameSite: none,
+      secure: true
+    });
     res.end();
   });
 
