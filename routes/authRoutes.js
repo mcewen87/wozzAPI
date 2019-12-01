@@ -21,6 +21,7 @@ module.exports = app => {
   app.options("/signUp", cors(options));
 
   app.get("/getToken", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "https://wozzapp.netlify.com");
     res.cookie("XSRF-TOKEN", req.csrfToken(), {
       sameSite: none,
       secure: true
@@ -90,6 +91,7 @@ module.exports = app => {
     (req, res, next) => {
       const email = req.body.email;
       const password = req.body.password;
+      res.header("Access-Control-Allow-Origin", "https://wozzapp.netlify.com");
 
       User.findOne({ email: email }, function(err, user) {
         if (err) {
