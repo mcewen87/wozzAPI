@@ -6,7 +6,7 @@ const cors = require("cors");
 module.exports = app => {
   //Generate CSRF Token
 
-  app.get("/getToken", cors(), (req, res) => {
+  app.get("/getToken", (req, res) => {
     res.cookie("XSRF-TOKEN", req.csrfToken(), {
       sameSite: none,
       secure: true
@@ -16,7 +16,7 @@ module.exports = app => {
 
   //Check Auth
 
-  app.get("/checkAuth", cors(), (req, res, next) => {
+  app.get("/checkAuth", (req, res, next) => {
     if (req.isAuthenticated()) {
       console.log("This is a test: " + req.user);
       const id = req.user.id.toString();
@@ -72,7 +72,7 @@ module.exports = app => {
   //Sign up
   app.post(
     "/signUp",
-    cors(),
+
     (req, res, next) => {
       const email = req.body.email;
       const password = req.body.password;
