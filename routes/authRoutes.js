@@ -6,7 +6,7 @@ const cors = require("cors");
 module.exports = app => {
   //Generate CSRF Token
 
-  app.get("/getToken", (req, res) => {
+  app.get("/getToken", cors(), (req, res) => {
     res.cookie("XSRF-TOKEN", req.csrfToken(), {
       sameSite: none,
       secure: true
@@ -16,7 +16,7 @@ module.exports = app => {
 
   //Check Auth
 
-  app.get("/checkAuth", (req, res, next) => {
+  app.get("/checkAuth", cors(), (req, res, next) => {
     if (req.isAuthenticated()) {
       console.log("This is a test: " + req.user);
       const id = req.user.id.toString();
