@@ -32,9 +32,9 @@ const options = {
   origin: "https://wozzapp.netlify.com",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders:
-    "Content-Type, Access-Control-Allow-Headers, Authorization,csrf-token",
+    "Content-Type, Access-Control-Allow-Headers, Access-Control-Allow-Origin, Authorization,csrf-token",
   exposedHeaders:
-    "Content-Type, Access-Control-Allow-Headers, Authorization,csrf-token",
+    "Content-Type, Access-Control-Allow-Headers, Access-Control-Allow-Origin, Authorization,csrf-token",
   maxAge: 3600,
   preflightContinue: true,
   credentials: true
