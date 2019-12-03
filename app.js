@@ -83,10 +83,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.options("/getToken", cors());
-app.options("/checkAuth", cors());
-app.options("/signIn", cors());
-app.options("/signUp", cors());
+app.options("/getToken", cors(options));
+app.options("/checkAuth", cors(options));
+app.options("/signIn", cors(options));
+app.options("/signUp", cors(options));
 
 require("./routes/testRoutes")(app);
 require("./routes/authRoutes")(app);
