@@ -8,7 +8,7 @@ module.exports = app => {
 
   app.get("/getToken", (req, res) => {
     res.cookie("XSRF-TOKEN", req.csrfToken(), {
-      sameSite: none,
+      sameSite: "none",
       secure: true
     });
     res.end();
