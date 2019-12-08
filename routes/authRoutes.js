@@ -2,15 +2,14 @@ const passport = require("passport");
 const User = require("../models/user");
 const moment = require("moment");
 const cors = require("cors");
+const csurf = require("csurf");
 
 module.exports = app => {
   //Generate CSRF Token
 
   app.get("/getToken", (req, res) => {
-    res.cookie("XSRF-TOKEN", req.csrfToken(), {
-      sameSite: "none",
-      secure: true
-    });
+    console.log("what up!");
+    res.cookie("XSRF-TOKEN", req.csrfToken());
     res.end();
   });
 

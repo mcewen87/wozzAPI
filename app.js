@@ -29,7 +29,7 @@ setUpPassport();
 //INITIALIZE EXPRESS
 const app = express();
 const options = {
-  origin: "https://wozzapp.netlify.com",
+  origin: "https://wozzapp.netlify.com/",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: [
     "Content-Type",
@@ -54,11 +54,10 @@ const options = {
 //SETUP APPLICATION MIDDLEWARE
 app.use(helmet());
 app.use(cookieParser());
-
+app.use(csurf({ cookie: true }));
 app.use(cors(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(csurf({ cookie: true }));
 
 // We Will use Secure in Production
 // when we have an HTTPS connection
