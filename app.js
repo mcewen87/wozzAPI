@@ -29,7 +29,7 @@ setUpPassport();
 //INITIALIZE EXPRESS
 const app = express();
 const options = {
-  origin: "http://localhost:8000",
+  origin: "https://wozzapp.netlify.com",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: [
     "Content-Type",
