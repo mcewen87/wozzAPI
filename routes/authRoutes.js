@@ -10,7 +10,8 @@ module.exports = app => {
   app.get("/getToken", (req, res) => {
     console.log("what up!");
     res.cookie("XSRF-TOKEN", req.csrfToken(), {
-      domain: "wozzapp.netlify.com"
+      secure: true,
+      sameSite: "none"
     });
     res.end();
   });
