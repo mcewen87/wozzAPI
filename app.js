@@ -54,7 +54,14 @@ const options = {
 //SETUP APPLICATION MIDDLEWARE
 app.use(helmet());
 app.use(cookieParser());
-app.use(csurf({ cookie: true }));
+app.use(
+  csurf({
+    cookie: {
+      httpOnly: true,
+      secure: !devModeFlag
+    }
+  })
+);
 app.use(cors(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
