@@ -29,6 +29,8 @@ setUpPassport();
 //INITIALIZE EXPRESS
 const app = express();
 const options = {
+  // http://localhost:8000
+  // https://wozzapp.netlify.com
   origin: "https://wozzapp.netlify.com",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: [
