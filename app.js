@@ -28,10 +28,23 @@ setUpPassport();
 
 //INITIALIZE EXPRESS
 const app = express();
+
+//CORS
+
+const whitelist = [
+  "https://wozzapp.netlify.com/",
+  "https://wozzapp.netlify.com"
+];
 const options = {
   // http://localhost:8000
   // https://wozzapp.netlify.com
-  origin: "https://wozzapp.netlify.com",
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: [
     "Content-Type",
