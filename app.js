@@ -38,7 +38,7 @@ const whitelist = [
 const options = {
   // http://localhost:8000
   // https://wozzapp.netlify.com
-  domain: "https://wozzapp.netlify.com",
+  origin: "https://wozzapp.netlify.com",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: [
     "Content-Type",
@@ -63,7 +63,7 @@ const options = {
 //SETUP APPLICATION MIDDLEWARE
 app.use(helmet());
 app.use(cookieParser());
-app.use(csurf({ cookie: true }));
+app.use(csurf({ cookie: true, domain: "https://wozzapp.netlify.com" }));
 app.use(cors(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
