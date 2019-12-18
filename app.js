@@ -38,7 +38,7 @@ const whitelist = [
 const options = {
   // http://localhost:8000
   // https://wozzapp.netlify.com
-  origin: "https://wozzapp.netlify.com",
+  domain: "https://wozzapp.netlify.com",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: [
     "Content-Type",
