@@ -63,7 +63,13 @@ const options = {
 //SETUP APPLICATION MIDDLEWARE
 app.use(helmet());
 app.use(cookieParser());
-app.use(csurf({ cookie: true, domain: "https://wozzapp.netlify.com" }));
+app.use(
+  csurf({
+    cookie: true,
+    domain: "https://wozzapp.netlify.com",
+    sameSite: "none"
+  })
+);
 app.use(cors(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -78,9 +84,11 @@ app.use(
     resave: false,
     //We Set saveUninitialized to false because we don't want to save unmodified
     //sessions to our mongo store
+    secure: true,
     domain: "https://wozzapp.netlify.com",
     saveUninitialized: false,
     unset: "destroy",
+    sameSite: "none",
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       //We encrypt out store code
