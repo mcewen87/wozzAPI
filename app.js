@@ -38,13 +38,7 @@ const whitelist = [
 const options = {
   // http://localhost:8000
   // https://wozzapp.netlify.com
-  origin: function(origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: "https://wozzapp.netlify.com",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: [
     "Content-Type",
@@ -84,6 +78,7 @@ app.use(
     resave: false,
     //We Set saveUninitialized to false because we don't want to save unmodified
     //sessions to our mongo store
+    domain: "https://wozzapp.netlify.com",
     saveUninitialized: false,
     unset: "destroy",
     store: new MongoStore({
