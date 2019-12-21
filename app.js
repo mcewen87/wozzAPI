@@ -55,7 +55,7 @@ const options = {
     "csrf-token"
   ],
 
-  maxAge: 3600,
+  maxAge: 360000000,
   preflightContinue: true,
   credentials: true
 };
