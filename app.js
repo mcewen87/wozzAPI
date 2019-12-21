@@ -66,7 +66,8 @@ app.use(cookieParser());
 app.use(
   csurf({
     cookie: true,
-    domain: "https://stormy-basin-80765.herokuapp.com/",
+    secure: true,
+    domain: "https://stormy-basin-80765.herokuapp.com",
     sameSite: "none"
   })
 );
@@ -85,7 +86,7 @@ app.use(
     //We Set saveUninitialized to false because we don't want to save unmodified
     //sessions to our mongo store
     secure: true,
-    domain: "https://stormy-basin-80765.herokuapp.com/",
+    domain: "https://stormy-basin-80765.herokuapp.com",
     saveUninitialized: false,
     unset: "destroy",
     sameSite: "none",
