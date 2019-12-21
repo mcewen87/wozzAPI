@@ -44,12 +44,16 @@ const options = {
     "Content-Type",
     "Access-Control-Allow-Headers",
     "Access-Control-Allow-Origin",
+    "Accept-Language",
+    "Content-Language",
     "Authorization",
     "csrf-token"
   ],
   exposedHeaders: [
     "Content-Type",
     "Access-Control-Allow-Headers",
+    "Accept-Language",
+    "Content-Language",
     "Access-Control-Allow-Credentials",
     "Access-Control-Allow-Origin",
     "Authorization",
