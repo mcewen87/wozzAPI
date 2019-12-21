@@ -75,7 +75,7 @@ app.use(
     maxAge: 150000000,
     httpOnly: true,
     secure: true,
-    domain: "https://stormy-basin-80765.herokuapp.com",
+    domain: "https://stormy-basin-80765.herokuapp.com/",
     sameSite: "none"
   })
 );
@@ -89,7 +89,7 @@ app.use(
     //This is our Encryption Key
     cookie: {
       secure: true,
-      domain: "https://stormy-basin-80765.herokuapp.com",
+      domain: "https://stormy-basin-80765.herokuapp.com/",
       sameSite: "none",
       httpOnly: true,
       maxAge: 150000000
