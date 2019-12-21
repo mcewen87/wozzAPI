@@ -67,6 +67,7 @@ app.use(
   csurf({
     cookie: true,
     maxAge: 50000,
+    httpOnly: true,
     secure: true,
     domain: "https://stormy-basin-80765.herokuapp.com",
     sameSite: "lax"
@@ -91,6 +92,7 @@ app.use(
     domain: "https://stormy-basin-80765.herokuapp.com",
     saveUninitialized: false,
     unset: "destroy",
+    httpOnly: true,
     sameSite: "lax",
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
