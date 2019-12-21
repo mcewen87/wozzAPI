@@ -82,18 +82,20 @@ app.use(bodyParser.json());
 app.use(
   session({
     //This is our Encryption Key
-    maxAge: 150000000,
+    cookie: {
+      secure: true,
+      domain: "https://stormy-basin-80765.herokuapp.com",
+      sameSite: "none",
+      httpOnly: true,
+      maxAge: 150000000
+    },
     secret: process.env.sessionCode,
     //We set resave to false because our mongo store implements the "touch" function
     resave: false,
     //We Set saveUninitialized to false because we don't want to save unmodified
     //sessions to our mongo store
-    secure: true,
-    domain: "https://stormy-basin-80765.herokuapp.com",
     saveUninitialized: false,
     unset: "destroy",
-    httpOnly: true,
-    sameSite: "none",
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       //We encrypt out store code
