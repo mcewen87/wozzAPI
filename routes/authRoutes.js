@@ -10,7 +10,7 @@ module.exports = app => {
   app.get("/getToken", (req, res) => {
     console.log("what up!");
     res.cookie("XSRF-TOKEN", req.csrfToken(), {
-      secure: !devModeFlag,
+      secure: true,
       sameSite: "none"
     });
     res.end();
