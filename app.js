@@ -66,11 +66,11 @@ app.use(cookieParser());
 app.use(
   csurf({
     cookie: true,
-    maxAge: 50000,
+    maxAge: 150000000,
     httpOnly: true,
     secure: true,
     domain: "https://stormy-basin-80765.herokuapp.com",
-    sameSite: "lax"
+    sameSite: "none"
   })
 );
 app.use(cors(options));
@@ -82,7 +82,7 @@ app.use(bodyParser.json());
 app.use(
   session({
     //This is our Encryption Key
-    maxAge: 50000,
+    maxAge: 150000000,
     secret: process.env.sessionCode,
     //We set resave to false because our mongo store implements the "touch" function
     resave: false,
@@ -93,7 +93,7 @@ app.use(
     saveUninitialized: false,
     unset: "destroy",
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: "none",
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       //We encrypt out store code
