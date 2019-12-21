@@ -69,7 +69,7 @@ app.use(
     maxAge: 50000,
     secure: true,
     domain: "https://stormy-basin-80765.herokuapp.com",
-    sameSite: "Lax"
+    sameSite: "lax"
   })
 );
 app.use(cors(options));
@@ -91,7 +91,7 @@ app.use(
     domain: "https://stormy-basin-80765.herokuapp.com",
     saveUninitialized: false,
     unset: "destroy",
-    sameSite: "Lax",
+    sameSite: "lax",
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       //We encrypt out store code
