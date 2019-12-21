@@ -66,6 +66,7 @@ app.use(cookieParser());
 app.use(
   csurf({
     cookie: true,
+    maxAge: 50000,
     secure: true,
     domain: "https://stormy-basin-80765.herokuapp.com",
     sameSite: "none"
@@ -80,6 +81,7 @@ app.use(bodyParser.json());
 app.use(
   session({
     //This is our Encryption Key
+    maxAge: 50000,
     secret: process.env.sessionCode,
     //We set resave to false because our mongo store implements the "touch" function
     resave: false,
