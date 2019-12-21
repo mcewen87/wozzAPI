@@ -73,7 +73,7 @@ app.use(
   csurf({
     cookie: true,
     maxAge: 150000000,
-    httpOnly: true,
+    // httpOnly: true,
     secure: true,
     // domain: "https://stormy-basin-80765.herokuapp.com/",
     sameSite: "none"
@@ -91,7 +91,7 @@ app.use(
       secure: true,
       // domain: "https://stormy-basin-80765.herokuapp.com/",
       sameSite: "none",
-      httpOnly: true,
+      // httpOnly: true,
       maxAge: 150000000
     },
     secret: process.env.sessionCode,
