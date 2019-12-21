@@ -8,7 +8,6 @@ module.exports = app => {
   //Generate CSRF Token
 
   app.get("/getToken", (req, res) => {
-    console.log("what up!");
     res.cookie("XSRF-TOKEN", req.csrfToken(), {
       secure: true,
       sameSite: "none"
@@ -68,6 +67,7 @@ module.exports = app => {
 
   //Sign in
   app.post("/signIn", passport.authenticate("login"), (req, res, next) => {
+    res.set("Access-Control-Allow-Credentials", true);
     res.send({ user: req.user, authStatus: true });
   });
 
