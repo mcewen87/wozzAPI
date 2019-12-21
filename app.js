@@ -61,6 +61,7 @@ const options = {
 };
 
 //SETUP APPLICATION MIDDLEWARE
+app.use(cors(options));
 app.use(helmet());
 app.use(cookieParser());
 app.use(
@@ -73,7 +74,6 @@ app.use(
     sameSite: "none"
   })
 );
-app.use(cors(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
