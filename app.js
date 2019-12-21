@@ -50,6 +50,7 @@ const options = {
   exposedHeaders: [
     "Content-Type",
     "Access-Control-Allow-Headers",
+    "Access-Control-Allow-Credentials",
     "Access-Control-Allow-Origin",
     "Authorization",
     "csrf-token"
