@@ -56,7 +56,7 @@ const options = {
   ],
 
   maxAge: 360000000,
-  preflightContinue: true,
+  // preflightContinue: true,
   credentials: true
 };
 
