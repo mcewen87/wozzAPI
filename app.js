@@ -34,6 +34,7 @@ const app = express();
 const whitelist = [
   "https://wozzapp.netlify.com/",
   "wozzapp.netlify.com/",
+  "http://localhost:8000",
   "https://wozzapp.netlify.com",
   "https://wozzapp.netlify.com/signin"
 ];
@@ -79,12 +80,12 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(
   csurf({
-    cookie: true,
-    maxAge: 150000000,
-    // httpOnly: true,
-    secure: true,
-    // domain: "https://stormy-basin-80765.herokuapp.com/",
-    sameSite: "none"
+    cookie: {
+      maxAge: 150000000,
+      secure: true,
+      sameSite: "none",
+      domain: "https://stormy-basin-80765.herokuapp.com/"
+    }
   })
 );
 app.use(bodyParser.urlencoded({ extended: false }));
