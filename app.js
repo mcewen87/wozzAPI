@@ -64,7 +64,7 @@ const options = {
   ],
 
   maxAge: 360000000,
-  // preflightContinue: true,
+  preflightContinue: true,
   credentials: true
 };
 
@@ -78,7 +78,7 @@ app.use(
       maxAge: 150000000,
       secure: true,
       sameSite: "none",
-      domain: "https://stormy-basin-80765.herokuapp.com/"
+      domain: "https://stormy-basin-80765.herokuapp.com"
     }
   })
 );
@@ -92,9 +92,9 @@ app.use(
     //This is our Encryption Key
     cookie: {
       secure: true,
-      // domain: "https://stormy-basin-80765.herokuapp.com/",
+      domain: "https://stormy-basin-80765.herokuapp.com",
       sameSite: "none",
-      // httpOnly: true,
+      httpOnly: true,
       maxAge: 150000000
     },
     secret: process.env.sessionCode,
