@@ -31,13 +31,6 @@ const app = express();
 
 //CORS
 
-const whitelist = [
-  "https://wozzapp.netlify.com/",
-  "wozzapp.netlify.com/",
-  "http://localhost:8000",
-  "https://wozzapp.netlify.com",
-  "https://wozzapp.netlify.com/signin"
-];
 const options = {
   origin: "https://wozzapp.netlify.com",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -72,12 +65,7 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(
   csurf({
-    cookie: {
-      maxAge: 150000000,
-      secure: true,
-      sameSite: "none",
-      domain: "https://stormy-basin-80765.herokuapp.com/"
-    }
+    cookie: true
   })
 );
 app.use(cors(options));
