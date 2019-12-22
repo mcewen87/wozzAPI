@@ -62,14 +62,12 @@ module.exports = app => {
       res.send({ user: req.user, authStatus: true, token: req.csrfToken() });
     } else {
       console.log("not auth'd");
-      res.cookie("test", "hello_world");
       res.send({ authStatus: false, token: req.csrfToken() });
     }
   });
 
   //Sign in
   app.post("/signIn", passport.authenticate("login"), (req, res, next) => {
-    res.set("Access-Control-Allow-Credentials", true);
     res.send({ user: req.user, authStatus: true });
   });
 
