@@ -78,7 +78,7 @@ const options = {
 app.use(cors(options));
 app.use(helmet());
 app.use(cookieParser());
-app.use(csurf({ cookie: true }));
+app.use(csurf({ cookie: { maxAge: 55000 } }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
