@@ -79,14 +79,15 @@ app.use(cors(options));
 app.use(helmet());
 app.use(cookieParser());
 app.use(
-  csurf({
-    cookie: {
-      maxAge: 150000000,
-      secure: true,
-      sameSite: "none",
-      domain: "https://stormy-basin-80765.herokuapp.com/"
-    }
-  })
+  csurf()
+  //   {
+  //   cookie: {
+  //     maxAge: 150000000,
+  //     secure: true,
+  //     sameSite: "none",
+  //     domain: "https://stormy-basin-80765.herokuapp.com/"
+  //   }
+  // }
 );
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
