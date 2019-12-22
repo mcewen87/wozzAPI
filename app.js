@@ -33,12 +33,19 @@ const app = express();
 
 const whitelist = [
   "https://wozzapp.netlify.com/",
-  "https://wozzapp.netlify.com"
+  "https://wozzapp.netlify.com",
+  "https://wozzapp.netlify.com/signin"
 ];
 const options = {
   // http://localhost:8000
   // https://wozzapp.netlify.com
-  origin: "wozzapp.netlify.com",
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: [
     "Content-Type",
