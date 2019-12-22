@@ -58,10 +58,10 @@ module.exports = app => {
       // averageCount: 0,
       // lowestCount: 0
 
-      res.send({ user: req.user, authStatus: true });
+      res.send({ user: req.user, authStatus: true, token: req.csrfToken() });
     } else {
       console.log("not auth'd");
-      res.send({ authStatus: false });
+      res.send({ authStatus: false, token: req.csrfToken() });
     }
   });
 

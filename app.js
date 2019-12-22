@@ -38,7 +38,7 @@ const whitelist = [
 const options = {
   // http://localhost:8000
   // https://wozzapp.netlify.com
-  origin: true,
+  origin: "https://wozzapp.netlify.com/",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: [
     "Content-Type",
@@ -69,16 +69,16 @@ const options = {
 app.use(cors(options));
 app.use(helmet());
 app.use(cookieParser());
-// app.use(
-//   csurf({
-//     cookie: true,
-//     maxAge: 150000000,
-//     // httpOnly: true,
-//     secure: true,
-//     // domain: "https://stormy-basin-80765.herokuapp.com/",
-//     sameSite: "none"
-//   })
-// );
+app.use(
+  csurf({
+    cookie: true,
+    maxAge: 150000000,
+    // httpOnly: true,
+    secure: true,
+    // domain: "https://stormy-basin-80765.herokuapp.com/",
+    sameSite: "none"
+  })
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
