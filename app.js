@@ -77,13 +77,11 @@ app.use(bodyParser.json());
 app.use(
   session({
     //This is our Encryption Key
-    cookie: {
-      secure: true,
-      domain: "https://stormy-basin-80765.herokuapp.com/",
-      sameSite: "none",
-      httpOnly: true,
-      maxAge: 150000000
-    },
+    secure: true,
+    domain: "https://stormy-basin-80765.herokuapp.com/",
+    sameSite: "none",
+    httpOnly: true,
+    maxAge: 150000000,
     secret: process.env.sessionCode,
     //We set resave to false because our mongo store implements the "touch" function
     resave: false,
