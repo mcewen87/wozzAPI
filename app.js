@@ -33,7 +33,7 @@ const app = express();
 
 const whitelist = [
   "https://wozzapp.netlify.com/",
-  "wozzapp.netlify.com/"
+  "wozzapp.netlify.com/",
   "https://wozzapp.netlify.com",
   "https://wozzapp.netlify.com/signin"
 ];
