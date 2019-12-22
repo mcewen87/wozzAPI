@@ -58,9 +58,11 @@ module.exports = app => {
       // averageCount: 0,
       // lowestCount: 0
 
+      res.cookie("test", "hello_world");
       res.send({ user: req.user, authStatus: true, token: req.csrfToken() });
     } else {
       console.log("not auth'd");
+      res.cookie("test", "hello_world");
       res.send({ authStatus: false, token: req.csrfToken() });
     }
   });
