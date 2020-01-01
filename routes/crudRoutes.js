@@ -21,7 +21,6 @@ module.exports = app => {
     const event = {
       title: encodedEventTitle,
       category: req.body.category,
-      noteId: req.body.noteId,
       lastActiveWeek: req.body.lastActiveWeek,
       lastOccurrence: Date.now(),
       longestDuration: 0,
@@ -39,44 +38,21 @@ module.exports = app => {
       lowestCount: 0
     };
 
-    const note = {
-      dateCreated: Date.now(),
-      parentEvent: req.body.noteId,
-      content: req.body.note,
-      category: req.body.category
-    };
     const id = req.user.id.toString();
-    if (note.content.length > 1) {
-      User.findOneAndUpdate(
-        { _id: id },
-        {
-          $push: { events: event, notes: note }
-        },
-        { new: true },
-        (error, document) => {
-          if (error) {
-            console.log(error);
-            return res.json({ success: false, message: error.message });
-          }
-          res.json({ event: document.events[document.events.length - 1] });
+    User.findOneAndUpdate(
+      { _id: id },
+      {
+        $push: { events: event }
+      },
+      { new: true },
+      (error, document) => {
+        if (error) {
+          console.log(error);
+          return res.json({ success: false, message: error.message });
         }
-      );
-    } else {
-      User.findOneAndUpdate(
-        { _id: id },
-        {
-          $push: { events: event }
-        },
-        { new: true },
-        (error, document) => {
-          if (error) {
-            console.log(error);
-            return res.json({ success: false, message: error.message });
-          }
-          res.json({ event: document.events[document.events.length - 1] });
-        }
-      );
-    }
+        res.json({ event: document.events[document.events.length - 1] });
+      }
+    );
   });
 
   //Reset Event

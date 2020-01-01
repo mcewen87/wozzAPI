@@ -5,6 +5,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
+const path = require("path");
 const MongoStore = require("connect-mongo")(session);
 const cors = require("cors");
 const csurf = require("csurf");
@@ -32,7 +33,7 @@ const app = express();
 //CORS
 
 const options = {
-  origin: "https://wozzapp.netlify.com",
+  origin: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: [
     "Content-Type",
@@ -71,6 +72,7 @@ app.use(
 app.use(cors(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 // We Will use Secure in Production
 // when we have an HTTPS connection
@@ -108,6 +110,14 @@ app.options("/signUp", cors(options));
 require("./routes/testRoutes")(app);
 require("./routes/authRoutes")(app);
 require("./routes/crudRoutes")(app);
+
+// => SEND REACT APPLICATION WITH * FOR WILDCARD ENDPOINTS
+
+app.use(express.static("public"));
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+// });
 
 app.use((error, req, res, next) => {
   console.log(error);
