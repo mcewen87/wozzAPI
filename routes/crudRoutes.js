@@ -1,6 +1,4 @@
 const User = require("../models/user");
-const crypto = require("crypto");
-const rotation = require("../utilities/encoding");
 
 // title: { type: String, required: true, unique: false },
 // category: { type: String, required: true, unique: false },
@@ -17,9 +15,8 @@ const rotation = require("../utilities/encoding");
 module.exports = app => {
   //Add Event
   app.post("/addEvent", (req, res, next) => {
-    let encodedEventTitle = rotation.encode(req.body.event);
     const event = {
-      title: encodedEventTitle,
+      title: req.body.event,
       category: req.body.category,
       lastActiveWeek: req.body.lastActiveWeek,
       lastOccurrence: Date.now(),
