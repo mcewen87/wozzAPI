@@ -19,9 +19,7 @@ module.exports = app => {
 
   app.get("/checkAuth", (req, res, next) => {
     if (req.isAuthenticated()) {
-      console.log("This is a test: " + req.user);
       const id = req.user.id.toString();
-      //new stuff
 
       User.findOne({ _id: id }, function(err, user) {
         user.events.map((e, i) => {
@@ -51,12 +49,6 @@ module.exports = app => {
 
         user.save();
       });
-
-      //new stuff
-
-      // highestCount: 0,
-      // averageCount: 0,
-      // lowestCount: 0
 
       res.cookie("test", "hello_world");
       res.send({ user: req.user, authStatus: true, token: req.csrfToken() });

@@ -57,11 +57,17 @@ module.exports = app => {
   app.post("/resetEvent", (req, res, next) => {
     const id = req.user.id.toString();
     const eventId = req.body.eventId.toString();
+    const positive = req.body.positiveExp;
+    const negative = req.body.negativeExp;
+    const neutral = req.body.neutralExp;
     console.log(eventId + " Hello World");
     User.findOneAndUpdate(
       { _id: id, "events._id": eventId },
       {
         $inc: { "events.$.count": 1 },
+        $inc: { "events.$.positiveExp": positive },
+        $inc: { "events.$.negativeExp": negative },
+        $inc: { "events.$.neutralExp": neutral },
         $set: { "events.$.lastOccurrence": Date.now() }
       },
       { new: true },
