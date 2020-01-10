@@ -64,10 +64,12 @@ module.exports = app => {
     User.findOneAndUpdate(
       { _id: id, "events._id": eventId },
       {
-        $inc: { "events.$.count": 1 },
-        $inc: { "events.$.positiveExp": positive },
-        $inc: { "events.$.negativeExp": negative },
-        $inc: { "events.$.neutralExp": neutral },
+        $inc: {
+          "events.$.count": 1,
+          "events.$.positiveExp": positive,
+          "events.$.negativeExp": negative,
+          "events.$.neutralExp": neutral
+        },
         $set: { "events.$.lastOccurrence": Date.now() }
       },
       { new: true },
