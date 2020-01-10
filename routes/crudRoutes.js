@@ -23,6 +23,7 @@ module.exports = app => {
       longestDuration: 0,
       longestDurationHistory: 0,
       count: 1,
+      lastCount: 0,
       positiveExp: req.body.positiveExp,
       neutralExp: req.body.neutralExp,
       negativeExp: req.body.negativeExp,

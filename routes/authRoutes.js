@@ -24,8 +24,9 @@ module.exports = app => {
       User.findOne({ _id: id }, function(err, user) {
         user.events.map((e, i) => {
           if (e.lastActiveWeek != moment().format("W") + 1) {
-            console.log(e.lastActiveWeek + " " + moment().format("W"));
-            console.log(e.countHistory);
+            console.log(
+              e.lastActiveWeek + " for the test " + moment().format("W")
+            );
 
             e.countHistory.push(e.count);
 
@@ -35,11 +36,10 @@ module.exports = app => {
               );
               e.averageCount = average;
             }
-
             e.count = 0;
-            e.positiveExpHistory = e.positiveExp;
-            e.negativeExpHistory = e.negativeExp;
-            e.neutralExpHistory = e.neutralExp;
+            e.positiveExpHistory += e.positiveExp;
+            e.negativeExpHistory += e.negativeExp;
+            e.neutralExpHistory += e.neutralExp;
             e.positiveExp = 0;
             e.negativeExp = 0;
             e.neutralExp = 0;
