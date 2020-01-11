@@ -9,6 +9,7 @@ let eventSchema = new mongoose.Schema({
   longestDuration: { type: Number, required: false },
   longestDurationHistory: { type: Number, required: false },
   count: { type: Number, required: true, unique: false },
+  lastWeekCount: { type: Number, required: true, unique: false },
   notes: [noteSchema],
   positiveExp: { type: Number, required: false, unique: false },
   neutralExp: { type: Number, required: false, unique: false },

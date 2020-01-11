@@ -17,46 +17,53 @@ module.exports = app => {
 
   //Check Auth
 
-  app.get("/checkAuth", (req, res, next) => {
-    if (req.isAuthenticated()) {
-      const id = req.user.id.toString();
+  app.get(
+    "/checkAuth",
+    (req, res, next) => {
+      if (req.isAuthenticated()) {
+        const id = req.user.id.toString();
 
-      User.findOne({ _id: id }, function(err, user) {
-        user.events.map((e, i) => {
-          if (e.lastActiveWeek != moment().format("W") + 1) {
-            console.log(
-              e.lastActiveWeek + " for the test " + moment().format("W")
-            );
-
-            e.countHistory.push(e.count);
-
-            if (e.countHistory.length > 3) {
-              const average = Math.floor(
-                e.countHistory.reduce((a, b) => a + b) / e.countHistory.length
+        User.findOneAndUpdate({ _id: id }, function(err, user) {
+          user.events.map((e, i) => {
+            if (e.lastActiveWeek != moment().format("W") + 1) {
+              console.log(
+                e.lastActiveWeek + " for the test " + moment().format("W")
               );
-              e.averageCount = average;
+
+              e.countHistory.push(e.count);
+              e.lastWeekCount = e.count;
+
+              if (e.countHistory.length > 3) {
+                const average = Math.floor(
+                  e.countHistory.reduce((a, b) => a + b) / e.countHistory.length
+                );
+                e.averageCount = average;
+              }
+              e.count = 0;
+              e.positiveExpHistory += e.positiveExp;
+              e.negativeExpHistory += e.negativeExp;
+              e.neutralExpHistory += e.neutralExp;
+              e.positiveExp = 0;
+              e.negativeExp = 0;
+              e.neutralExp = 0;
             }
-            e.count = 0;
-            e.positiveExpHistory += e.positiveExp;
-            e.negativeExpHistory += e.negativeExp;
-            e.neutralExpHistory += e.neutralExp;
-            e.positiveExp = 0;
-            e.negativeExp = 0;
-            e.neutralExp = 0;
-          }
-          return e;
+            return e;
+          });
+
+          user.save(next);
         });
 
-        user.save();
-      });
-
-      res.cookie("test", "hello_world");
+        // res.send({ user: req.user, authStatus: true, token: req.csrfToken() });
+      } else {
+        console.log("not auth'd");
+        res.send({ authStatus: false, token: req.csrfToken() });
+      }
+    },
+    (req, res, next) => {
+      console.log(req.user.events);
       res.send({ user: req.user, authStatus: true, token: req.csrfToken() });
-    } else {
-      console.log("not auth'd");
-      res.send({ authStatus: false, token: req.csrfToken() });
     }
-  });
+  );
 
   //Sign in
   app.post("/signIn", passport.authenticate("login"), (req, res, next) => {
